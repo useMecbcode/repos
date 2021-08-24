@@ -54,9 +54,11 @@ void event_loop(SDL_Surface * screen, SDL_Window*win)
         draw(screen,win);
         SDL_Event event;
         SDL_PollEvent(&event);
-        if (event.type == SDL_QUIT)
-        {
-            break;
+        if (SDL_PollEvent(&event)){
+            if (event.type == SDL_QUIT)
+            {
+                break;
+            }
         }
         uint32_t current = SDL_GetTicks(); // get time
         uint32_t cost = current - start; // draw time
