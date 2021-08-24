@@ -2,16 +2,22 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 const int WIDTH = 1234;
 const int HEIGHT = 512;
 const int FrameRate = 30;
-int x = 0;
-SDL_Surface *image ;
 
+TTF_Font *font;
+const int fontsize = 32;
 void event_loop(SDL_Surface * screen, SDL_Window*win);
 void draw(SDL_Surface * screen, SDL_Window*win);
 int main() {
+    if(TTF_Init())
+    {
+        SDL_Log("Can not init ttf, %s",TTF_GetError());
+        return 1;
+    }
     if(SDL_Init(SDL_INIT_VIDEO))
     {
         SDL_Log("Can not init video, %s",SDL_GetError());
@@ -29,19 +35,27 @@ int main() {
         SDL_Log("Can not Create Window, %s",SDL_GetError());
         return 1;
     }
+    font = TTF_OpenFont("Lucaus.ttf",fontsize);
+    if (font == NULL)
+    {
+        SDL_Log("Can not open font");
+        return 1;
+    }
     SDL_Surface *screen = SDL_GetWindowSurface(win);
-    image = IMG_Load("BtSnake.png");
     event_loop(screen,win);
     //Destroy WINDOW
-    SDL_FreeSurface(image);
+    TTF_CloseFont(font);
     SDL_DestroyWindow(win);
     SDL_FreeSurface(screen);
     return 0;
 }
 void draw(SDL_Surface * screen, SDL_Window*win)
 {
-    SDL_Rect src = {0,0,image->w,image->h};
-    SDL_BlitSurface(image,&src,screen,&src);// copy to screen
+    SDL_Color color = {255,255,255,255};
+    SDL_Surface *text = TTF_RenderUTF8_Blended(font,"Welcome to China",color);
+    SDL_Rect src = {0,0,text->w,text->h};
+    SDL_BlitSurface(text,&src,screen,&src);
+    SDL_FreeSurface(text);
     SDL_UpdateWindowSurface(win);
 }
 void event_loop(SDL_Surface * screen, SDL_Window*win)
