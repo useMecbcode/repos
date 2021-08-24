@@ -8,8 +8,8 @@
     * 将贪吃蛇改成王子拯救公主的故事
       * 参考了从百草园到三味书屋中写的美女蛇的故事
       * 剧情待完成
-  * ![](C:\Users\23101\Documents\BeautySnake.png)
-  * ![](C:\Users\23101\Documents\BtSnake.png)
+  * ![](https://github.com/useMecbcode/repos/blob/main/BeautySnake.png)
+  * ![]https://github.com/useMecbcode/repos/blob/main/BtSnake.png)
   * Base on RoullikeSnake
     * ![](F:\RoullikeSnake\screenshot.gif)
     * 游戏演示
@@ -33,5 +33,5 @@
 
     --------
 
-    ![](C:\Users\23101\Documents\Pushfish.png)
+    ![](https://github.com/useMecbcode/repos/blob/main/Pushfish.png)
 
