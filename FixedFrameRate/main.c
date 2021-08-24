@@ -4,7 +4,7 @@
 
 const int WIDTH = 400;
 const int HEIGHT = 300;
-const int FrameRate = 60;
+const int FrameRate = 30;
 int x = 0;
 void event_loop(SDL_Surface * screen, SDL_Window*win);
 void draw(SDL_Surface * screen, SDL_Window*win);
@@ -54,10 +54,10 @@ void event_loop(SDL_Surface * screen, SDL_Window*win)
         draw(screen,win);
         SDL_Event event;
         SDL_PollEvent(&event);
-        if (SDL_PollEvent(&event)){
+        while(SDL_PollEvent(&event)){
             if (event.type == SDL_QUIT)
             {
-                break;
+                return;
             }
         }
         uint32_t current = SDL_GetTicks(); // get time
@@ -65,7 +65,7 @@ void event_loop(SDL_Surface * screen, SDL_Window*win)
 
         uint32_t frame = 1000/FrameRate; // per animation time
 
-        uint32_t delay = frame - cost; // get delay time
+        int64_t delay = (int64_t)(frame - cost); // get delay time
 
         if (delay > 0)
         {
